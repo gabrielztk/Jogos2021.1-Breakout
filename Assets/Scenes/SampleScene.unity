@@ -912,6 +912,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bloco: {fileID: 6789959584820379918, guid: 4d5dbb5f4e036ad4887d862cd01ad371, type: 3}
+  BlocoAzul: {fileID: 3615818353994781174, guid: 9ae89c76e5e21474282d89f5fc18a4a0,
+    type: 3}
+  BlocoVermelho: {fileID: 6587749028799930643, guid: a11da3ab128344b4e99e677e11f206f4,
+    type: 3}
 --- !u!1 &986373046
 GameObject:
   m_ObjectHideFlags: 0

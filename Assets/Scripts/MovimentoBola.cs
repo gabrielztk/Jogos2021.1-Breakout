@@ -40,7 +40,7 @@ public class MovimentoBola : MonoBehaviour
             Reset();
         }
 
-        Debug.Log($"Vidas: {gm.vidas} \t | \t Pontos: {gm.pontos}");
+        // Debug.Log($"Vidas: {gm.vidas} \t | \t Pontos: {gm.pontos}");
     }
 
     private void Reset()
@@ -61,18 +61,50 @@ public class MovimentoBola : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col)
-    {
+    {   
+        bool upDown = false; 
+
         if(col.gameObject.CompareTag("Player"))
-        {
-            float dirX = Random.Range(-5.0f, 5.0f);
-            float dirY = Random.Range(1.0f, 5.0f);
+        {   
+            float dirX;
+            float dirY;
+            if (transform.localPosition[1] >= col.bounds.center[1] + col.bounds.extents[1] || transform.localPosition[1] <= col.bounds.center[1] - col.bounds.extents[1]) 
+            {
+                upDown = true;
+            }
+
+            if (upDown)
+            {
+                dirX = (transform.localPosition[0] - col.bounds.center[0]);
+                dirY = 1.0f;
+            }
+            else
+            {
+                dirX = Random.Range(-1.0f, 1.0f);
+                dirY = Random.Range(1.0f, 1.0f);
+            }
 
             direcao = new Vector3(dirX, dirY).normalized;
         }
         else if(col.gameObject.CompareTag("Bloco"))
-        {
-            direcao = new Vector3(direcao.x, -direcao.y);
+        {   
+            if (transform.localPosition[1] >= col.bounds.center[1] + 0.25 || transform.localPosition[1] <= col.bounds.center[1] - 0.25) 
+            {
+                upDown = true;
+            }   
+
+            if (upDown)
+            {
+                direcao = new Vector3(direcao.x, -direcao.y);
+            } 
+            else
+            {
+                direcao = new Vector3(-direcao.x, direcao.y);
+            }
+            
             gm.pontos++;
         }
+
+        Debug.Log("ColName: " + col.gameObject.name + ", ColBounds: " + col.bounds + ", Pos: " + transform.localPosition + ", UpDown: " + upDown);
     }
 }

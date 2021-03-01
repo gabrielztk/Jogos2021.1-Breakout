@@ -6,6 +6,8 @@ using UnityEngine;
 public class BlocoSpawner : MonoBehaviour
 {
   public GameObject Bloco;
+  public GameObject BlocoAzul;
+  public GameObject BlocoVermelho;
   GameManager gm;
 
     void Start()
@@ -27,9 +29,29 @@ public class BlocoSpawner : MonoBehaviour
             for(int i = 0; i < 12; i++)
             {
                 for(int j = 0; j < 4; j++){
-                    Vector3 posicao = new Vector3(-9 + 1.55f * i, 4 - 0.55f * j);
-
-                    Instantiate(Bloco, posicao, Quaternion.identity, transform);
+                    Vector3 posicao = new Vector3(-8.55f + 1.55f * i, 4 - 0.55f * j);
+                    if (j % 2 == 0)
+                    {
+                        if (i % 3 == 0)
+                        {
+                            Instantiate(BlocoAzul, posicao, Quaternion.identity, transform);
+                        }
+                        else
+                        {
+                            Instantiate(Bloco, posicao, Quaternion.identity, transform);
+                        }
+                    }
+                    else
+                    {
+                        if (i % 4 == 0)
+                        {
+                            Instantiate(BlocoVermelho, posicao, Quaternion.identity, transform);
+                        }
+                        else
+                        {
+                            Instantiate(Bloco, posicao, Quaternion.identity, transform);
+                        }
+                    }
                 }
             }
         }
